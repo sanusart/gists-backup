@@ -12,5 +12,5 @@ Run
 
 Run `node bkp.js USERNAME PASSWORD`
 
-If all went well, you'll see "gists" directory populated with directories named after gist IDs.
-Why named from gist ID? - Because majority of people not filing descriptions upon opening new gist, thos gist are simply called 'Untitled'.
+If all went well, you'll see "gists" directory populated with directories named after gist description.
+Gists with similar descriptions will be appended with 'duplicate N' (where N is an incremented number) gists without description gist will simply be called 'Untitled'.

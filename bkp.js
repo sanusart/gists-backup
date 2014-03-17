@@ -4,7 +4,7 @@ var fs = require('fs');
 
 var savedir = process.cwd() + '/gists';
 
-if(!process.argv[2] || !process.argv[3]) {
+if (!process.argv[2] || !process.argv[3]) {
     usage();
     return false;
 }
@@ -21,11 +21,21 @@ function getGists(page) {
             'User-Agent': 'Gists backup'
         }
     };
-    rest.get('https://api.github.com/gists?per_page=30&page=' + page, options).on('success', function (data, response) {
-
+    rest.get('https://api.github.com/gists?per_page=100&page=' + page, options).on('success', function (data, response) {
+        var increment = 1;
         data.forEach(function (gist) {
-            var dir = savedir + '/' + gist.id;
-            fs.mkdir(dir);
+            var description = (gist.description == '') ? 'Untitled' : gist.description.replace('/', ' or ').replace('\\', ' or ');
+            var dir = savedir + '/' + description;
+
+            try {
+                fs.statSync(dir);
+                dir = dir + ' duplicate ' + increment++;
+                fs.mkdir(dir);
+            }
+            catch (err) {
+                fs.mkdir(dir);
+            }
+
             for (var file in gist.files) {
                 var raw_url = gist.files[file].raw_url;
                 var filename = gist.files[file].filename;
