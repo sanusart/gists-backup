@@ -1,0 +1,28 @@
+{
+  "name": "gist-backup",
+  "version": "1.0.0",
+  "description": "This script will download all gist files to local directory",
+  "main": "bkp.js",
+  "dependencies": {
+    "request": "~2.34.0",
+    "restler": "~3.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node bkp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanusart/gists-backup.git"
+  },
+  "keywords": [
+    "gist",
+    "backup"
+  ],
+  "author": "Sasha Khamkov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanusart/gists-backup/issues"
+  },
+  "homepage": "https://github.com/sanusart/gists-backup"
+}
