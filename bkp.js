@@ -21,10 +21,21 @@ function getGists(page) {
             'User-Agent': 'Gists backup'
         }
     };
-    rest.get('https://api.github.com/gists?per_page=100&page=' + page, options).on('success', function (data, response) {
-        var increment = 1;
+
+    rest.get('https://api.github.com/gists?per_page=100&page=' + page, options).on('complete', function (data, response) {
+		var increment = 1;
         data.forEach(function (gist) {
-            var description = (gist.description == '') ? 'Untitled' : gist.description.replace('/', ' or ').replace('\\', ' or ');
+            var description = (gist.description == '') ? 'Untitled' : gist.description
+			.replace(/\//gi, ' or ')
+			.replace(/\>/gi, '')
+			.replace(/\</gi, '')
+			.replace(/\:/gi, '')
+			.replace(/\"/gi, '')
+			.replace(/\|/gi, '')
+			.replace(/\?/gi, '')
+			.replace(/\*/gi, '')
+			.replace(/\\/gi, ' or ');
+			
             var dir = savedir + '/' + description;
 
             try {
