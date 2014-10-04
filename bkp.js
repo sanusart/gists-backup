@@ -50,7 +50,14 @@ function getGists(page) {
             for (var file in gist.files) {
                 var raw_url = gist.files[file].raw_url;
                 var filename = gist.files[file].filename;
-                request(raw_url).pipe(fs.createWriteStream(dir + '/' + filename));
+                request(raw_url).pipe(fs.createWriteStream(dir + '/' + filename,function(error){
+                    if (error) {
+                        throw error;
+                    } else {
+                        console.log('successfully created ' + dir + '/' + filename);
+                    }
+
+                }));
             }
         });
         if (page === 1 && response.headers.link) {
