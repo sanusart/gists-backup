@@ -41,10 +41,24 @@ function getGists(page) {
             try {
                 fs.statSync(dir);
                 dir = dir + ' duplicate ' + increment++;
-                fs.mkdir(dir);
+                fs.mkdir(dir,function(error){
+                    if (error) {
+                        throw error;
+                    } else {
+                        console.log('successfully created ' + dir );
+                    }
+
+                });
             }
             catch (err) {
-                fs.mkdir(dir);
+                fs.mkdir(dir,function(error){
+                    if (error) {
+                        console.log('Error: ' + error );
+                    } else {
+                        console.log('successfully created ' + dir );
+                    }
+
+                });
             }
 
             for (var file in gist.files) {
