@@ -5,7 +5,7 @@ This package will download all gist files to directories named after gist descri
 Pre-run
 ---
 
-Run `[sudo] npm install gist-backup --globall`
+Run `[sudo] npm install gist-backup --global`
 
 Run
 ---

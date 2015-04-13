@@ -1,14 +1,13 @@
 #!/usr/bin/env node
-
 var rest = require('restler');
 var request = require('request');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 var prompt = require('synchro-prompt');
 
-var ghUsername = process.argv[1] || prompt('Your GitHub Username? ');
-var ghPassword = process.argv[2] || prompt('Your GitHub Password? ');
-var savedir = process.argv[3] || prompt('Your GitHub Username? ');
+var ghUsername = process.argv[2] || prompt('Your GitHub Username? ');
+var ghPassword = process.argv[3] || prompt('Your GitHub Password? ');
+var savedir = process.argv[4] || prompt('Path to back-up dir (will create if not exists)? ');
 
 mkdirp(savedir);
 
