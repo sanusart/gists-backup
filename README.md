@@ -16,5 +16,7 @@ or just
 
 `gist-backup` (will be prompted for username, password and local path to backup directory)
 
+---
+
 If all went well, you'll see "gists" directory populated with directories named after gist description.
 Gists with similar descriptions will be appended with 'duplicate N' (where N is an incremented number), gists without description will simply be called 'Untitled'.
