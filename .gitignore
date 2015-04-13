@@ -54,4 +54,5 @@ build
 .grunt
 
 node_modules
-
+gists
+!gists/.gitkeep
