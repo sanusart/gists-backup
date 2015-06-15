@@ -7,7 +7,7 @@ var prompt = require('synchro-prompt');
 
 var ghUsername = process.argv[2] || prompt('Your GitHub Username? ');
 var ghPassword = process.argv[3] || prompt('Your GitHub Password? ');
-var savedir = process.argv[4] || prompt('Path to back-up dir (will create if not exists)? ');
+var savedir = process.argv[4] || prompt('Path to back-up dir (will create if not exists)? ') || 'gists';
 
 mkdirp(savedir);
 
@@ -59,14 +59,11 @@ function getGists(page) {
                 if (gist.files.hasOwnProperty(file)) {
                     var raw_url = gist.files[file].raw_url;
                     var filename = gist.files[file].filename;
-                    request(raw_url).pipe(fs.createWriteStream(dir + '/' + filename, function (error) {
-                        if (error) {
-                            throw error;
-                        } else {
-                            console.log('successfully created ' + dir + '/' + filename);
-                        }
-
-                    }));
+                    var streamed = fs.createWriteStream(dir + '/' + filename);
+                    request(raw_url).pipe(streamed);
+                    streamed.on('error', function(error){
+                        console.log('Write error: ' + error);
+                    });
                 }
             }
         });

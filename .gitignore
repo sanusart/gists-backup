@@ -55,4 +55,3 @@ build
 
 node_modules
 gists
-!gists/.gitkeep
