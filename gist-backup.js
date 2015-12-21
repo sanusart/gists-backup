@@ -3,10 +3,10 @@ var rest = require('restler');
 var request = require('request');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-var prompt = require('synchro-prompt');
+var prompt = require('sync-prompt').prompt;
 
 var ghUsername = process.argv[2] || prompt('Your GitHub Username? ');
-var ghPassword = process.argv[3] || prompt('Your GitHub Password? ');
+var ghPassword = process.argv[3] || prompt.hidden('Your GitHub Password? ');
 var savedir = process.argv[4] || prompt('Path to back-up dir (will create if not exists)? ') || 'gists';
 
 mkdirp(savedir);
