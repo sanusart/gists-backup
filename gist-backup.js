@@ -28,7 +28,7 @@ function getGists(page) {
         data.forEach(function (gist) {
             var description = (!gist.description) ? 'Untitled' : gist.description
                 .trim()
-                .replace(/[^a-zA-Z0-9\s]/g, '');
+                .replace(/[^a-zA-Z0-9\s\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\%\.\+\~\_]/g, '');
 
             var dir = savedir + '/' + description;
 
