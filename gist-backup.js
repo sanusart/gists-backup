@@ -30,12 +30,15 @@ function getGists(page) {
                 .trim()
                 .replace(/[^a-zA-Z0-9\s\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\%\.\+\~\_]/g, '');
 
+            if (description.length > 255) {
+                description = description.substring(0,255);
+            }
             var dir = savedir + '/' + description;
 
             try {
                 fs.statSync(dir);
                 dir = dir + ' duplicate ' + increment++;
-                mkdirp(dir, function (error) {
+                mkdirp.sync(dir, function (error) {
                     if (error) {
                         throw error;
                     } else {
@@ -45,7 +48,7 @@ function getGists(page) {
                 });
             }
             catch (err) {
-                mkdirp(dir, function (error) {
+                mkdirp.sync(dir, function (error) {
                     if (error) {
                         console.log('Error: ' + error);
                     } else {

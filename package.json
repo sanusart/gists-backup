@@ -1,6 +1,6 @@
 {
   "name": "gist-backup",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "This script will download all gist files to local directory",
   "main": "gist-backup.js",
   "dependencies": {
