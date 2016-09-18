@@ -24,6 +24,10 @@ function getGists(page) {
     };
 
     rest.get('https://api.github.com/gists?per_page=100&page=' + page, options).on('complete', function (data, response) {
+        if (data instanceof Error) {
+            console.log('Error:', data.message);
+            return;
+        }
         var increment = 1;
         data.forEach(function (gist) {
             var description = (!gist.description) ? 'Untitled' : gist.description
@@ -84,6 +88,9 @@ function getGists(page) {
                 }
             }
         }
+    }).on('error', function(err) {
+        console.log('Error: ' + err);
+        return;
     });
 }
 
