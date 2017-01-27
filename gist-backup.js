@@ -7,7 +7,8 @@ var prompt = require('readline-sync');
 
 var ghUsername = process.argv[2] || prompt.question('Your GitHub Username? ');
 var ghPassword = process.argv[3] || prompt.question('Your GitHub Password? ', { hideEchoBack: true });
-var savedir = process.argv[4] || prompt.question('Path to back-up dir (will create if not exists)? ') || 'gists';
+var baseUrl = process.argv[4] || prompt.question('Base URL if enterprise (Press Enter to use GitHub "https://api.github.com" by default)? ') || 'https://api.github.com';
+var savedir = process.argv[5] || prompt.question('Path to back-up dir (will create if not exists)? ') || 'gists';
 
 mkdirp(savedir);
 
@@ -18,12 +19,13 @@ function getGists(page) {
     var options = {
         username: ghUsername,
         password: ghPassword,
+        url: baseUrl
         headers: {
             'User-Agent': 'Gists backup'
         }
     };
 
-    rest.get('https://api.github.com/gists?per_page=100&page=' + page, options).on('complete', function (data, response) {
+    rest.get(baseUrl + '/gists?per_page=100&page=' + page, options).on('complete', function (data, response) {
         if (data instanceof Error) {
             console.log('Error:', data.message);
             return;
