@@ -19,7 +19,7 @@ function getGists(page) {
     var options = {
         username: ghUsername,
         password: ghPassword,
-        url: baseUrl
+        url: baseUrl,
         headers: {
             'User-Agent': 'Gists backup'
         }
